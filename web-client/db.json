@@ -1,0 +1,110 @@
+{
+  "products": [
+    {
+      "prod_id": 1,
+      "prod_name": "Microsoft Xbox Series S Console - 512GB",
+      "prod_desc": "Access your favorite entertainment through apps like YouTube, Netflix, and more.Enjoy over 100 games right out of the box with a 1 month Xbox Game Pass trial.",
+      "prod_price": 270.3,
+      "prod_img_url": "https://m.media-amazon.com/images/I/71Dl1Mewm5L._AC_UY436_FMwebp_QL65_.jpg"
+    },
+    {
+      "prod_id": 2,
+      "prod_name": "3X3 Rubix Cube",
+      "prod_desc": "Speed Cube 3x3 is the classic color-matching puzzle. Turn and twist the sides of the cube so that each of the six faces only has one color. Suitable for beginner and professional players.",
+      "prod_price": 25,
+      "prod_img_url": "https://m.media-amazon.com/images/I/71WS9kb-JFL._AC_UL640_FMwebp_QL65_.jpg"
+    },
+    {
+      "prod_id": 3,
+      "prod_name": "Corsair Vengeance RGB Pro 32GB",
+      "prod_desc": "High performance DDR4 memory illuminates your system with vivid, animated lighting from ten ultra-bright, individually addressable RGB LEDs per module.",
+      "prod_price": 150,
+      "prod_img_url": "https://m.media-amazon.com/images/I/61GpY38PAWL._AC_SY200_.jpg"
+    },
+    {
+      "prod_id": 4,
+      "prod_name": "USB C Docking Station",
+      "prod_desc": "USB C Docking Station Expand your work opportunities(support 3 different monitors) and provide you more stable performance. No need any drivers or software, just plug and play.Support Extend Mode Or Mirror Mode, HDMI 3840*2160@30hz, VGA 1920*1080@60Hz. An ideal Gadget for Video Editor, Photography, Programmer. Support both SST and MST mode. Please note that if you use it on Apple Mac OS system, it only support mirror mode without triple display",
+      "prod_price": 20.45,
+      "prod_img_url": "https://m.media-amazon.com/images/I/81kKEudGqXL._AC_SY400_.jpg"
+    },
+    {
+      "prod_id": 5,
+      "prod_name": "Kirby and the Forgotten Land - Nintendo Switch",
+      "prod_desc": "Join Kirby in an unforgettable journey on a delightful 3D platforming adventure .Explore a mysterious world with abandoned structures, remnants of a past civilization. Copy enemies abilities like the new Drill and Ranger and use them to attack and explore. They can even be evolved to become stronger.",
+      "prod_price": 7.5,
+      "prod_img_url": "https://m.media-amazon.com/images/I/71bSke9MDHL._AC_UY436_FMwebp_QL65_.jpg"
+    },
+    {
+      "prod_id": 6,
+      "prod_name": "Nintendo Switch",
+      "prod_desc": "Nintendo Switch with Neon Blue and Neon Red Joy‑Con - HAC-001..",
+      "prod_price": 220,
+      "prod_img_url": "https://m.media-amazon.com/images/I/61-PblYntsL._AC_UY436_FMwebp_QL65_.jpg"
+    },
+    {
+      "prod_id": 7,
+      "prod_name": "300 PCS Stickers Pack (50-850Pcs/Pack)",
+      "prod_desc": "Package includes 400 pieces of different sticker styles. It includes 300 large stickers ranging in size from 2.5 inches to 3.5 inches, and 100 Pcs free gift mini stickers ranging in size from 0.8 inches to 1.2 inches.",
+      "prod_price": 17.5,
+      "prod_img_url": "https://m.media-amazon.com/images/I/91cqHb9t32L._AC_SY400_.jpg"
+    },
+    {
+      "prod_id": 8,
+      "prod_name": "Star Wars The Black Series Gaming Greats",
+      "prod_desc": "Star Wars The Black Series Gaming Greats 6 Inch Action Figure Exclusive - Jet Trooper Blue.",
+      "prod_price": 33,
+      "prod_img_url": "https://m.media-amazon.com/images/I/419dTmYUw8L._AC_UL640_FMwebp_QL65_.jpg"
+    },
+    {
+      "prod_id": 9,
+      "prod_name": "FOECBIR Aiw Wfdnn Beanie Hat",
+      "prod_desc": "100% high quality stretchy polyester slouchy beanie for men and women. extremely comfortable and soft.It has great heat collection performance that can offer maximum heat retention,long-lasting and warmest winter hat.Mens beanie hat cover ears, also called ear beanies men hat. Aim to enjoy the windy weather with warm and soft. Dont hesitate, this is the very cool beanies for guys hat you are looking forward to.",
+      "prod_price": 13,
+      "prod_img_url": "https://m.media-amazon.com/images/I/81KbJLQ0nEL._AC_UL640_FMwebp_QL65_.jpg"
+    }
+  ],
+  "cartItems": [
+    {
+      "product": {
+        "prod_id": 2,
+        "prod_name": "3X3 Rubix Cube",
+        "prod_desc": "Speed Cube 3x3 is the classic color-matching puzzle. Turn and twist the sides of the cube so that each of the six faces only has one color. Suitable for beginner and professional players.",
+        "prod_price": 25,
+        "prod_img_url": "https://m.media-amazon.com/images/I/71WS9kb-JFL._AC_UL640_FMwebp_QL65_.jpg"
+      },
+      "id": 6
+    },
+    {
+      "product": {
+        "prod_id": 2,
+        "prod_name": "3X3 Rubix Cube",
+        "prod_desc": "Speed Cube 3x3 is the classic color-matching puzzle. Turn and twist the sides of the cube so that each of the six faces only has one color. Suitable for beginner and professional players.",
+        "prod_price": 25,
+        "prod_img_url": "https://m.media-amazon.com/images/I/71WS9kb-JFL._AC_UL640_FMwebp_QL65_.jpg"
+      },
+      "id": 7
+    },
+    {
+      "product": {
+        "prod_id": 3,
+        "prod_name": "Corsair Vengeance RGB Pro 32GB",
+        "prod_desc": "High performance DDR4 memory illuminates your system with vivid, animated lighting from ten ultra-bright, individually addressable RGB LEDs per module.",
+        "prod_price": 150,
+        "prod_img_url": "https://m.media-amazon.com/images/I/61GpY38PAWL._AC_SY200_.jpg"
+      },
+      "id": 8
+    }
+  ],
+  "wishlist": [
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 8
+    }
+  ]
+}

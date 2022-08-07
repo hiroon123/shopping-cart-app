@@ -1,0 +1,113 @@
+<body>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+    <div class="container">
+
+       <!-- Display Error Messages -->
+       <div class="alert alert-danger mt-3" role="alert" *ngIf="errorMessage!=''">
+        <h4 class="alert-heading">Oops! That didn't work!</h4>
+        <p>{{errorMessage}}</p>
+        <hr>
+        <p class="mb-0">Please contact help@shopsy.com for quick assitance.</p>
+      </div>
+      
+        <div class="row mt-4">
+            <div class="col-xl-3"></div>
+            <div class="col-xl-6">
+                <div class="card">
+                          <h3>Enter the verification code</h3>
+                          <span>6-digit verification code has been sent to your email address</span>
+                          <div class="mt-3" [formGroup]="verificationCodeForm" (ngSubmit)="verify()">
+                            <input
+                            type="text"
+                            maxLength="1"
+                            [ngClass]="{ 'is-invalid': verificationCodeForm.get('s1')?.touched && verificationCodeForm.get('s1')?.invalid }"
+                            formControlName="s1"/>
+                            <input
+                            type="text"
+                            maxLength="1"
+                            [ngClass]="{ 'is-invalid': verificationCodeForm.get('s2')?.touched && verificationCodeForm.get('s2')?.invalid }"
+                            formControlName="s2"/>
+                            <input
+                            type="text"
+                            maxLength="1"
+                            [ngClass]="{ 'is-invalid': verificationCodeForm.get('s3')?.touched && verificationCodeForm.get('s3')?.invalid }"
+                            formControlName="s3"/>
+                            <input
+                            type="text"
+                            maxLength="1"
+                            [ngClass]="{ 'is-invalid': verificationCodeForm.get('s4')?.touched && verificationCodeForm.get('s4')?.invalid }"
+                            formControlName="s4"/>
+                            <input
+                            type="text"
+                            maxLength="1"
+                            [ngClass]="{ 'is-invalid': verificationCodeForm.get('s5')?.touched && verificationCodeForm.get('s5')?.invalid }"
+                            formControlName="s5"/>
+                            <input
+                            type="text"
+                            maxLength="1"
+                            [ngClass]="{ 'is-invalid': verificationCodeForm.get('s6')?.touched && verificationCodeForm.get('s6')?.invalid }"
+                            formControlName="s6"/>
+                            
+                            <br>
+                            <button class="btn btn-success btn-lg btn-embossed mt-3 mb-3" [disabled]="verificationCodeForm.invalid">Verify</button>
+                          </div>
+                          <div>
+                            Didn't receive the code?<br />
+                            <a href="#">Send code again</a><br />
+                          </div>
+                        </div>
+                      </div>
+
+            </div>
+            </div>
+            <div class="col-xl-3"></div>
+    </body>
+
+    <script>
+$(function() {
+  'use strict';
+
+  var body = $('body');
+
+  function goToNextInput(e) {
+    var key = e.which,
+      t = $(e.target),
+      sib = t.next('input');
+
+    if (key != 9 && (key < 48 || key > 57)) {
+      e.preventDefault();
+      return false;
+    }
+
+    if (key === 9) {
+      return true;
+    }
+
+    if (!sib || !sib.length) {
+      sib = body.find('input').eq(0);
+    }
+    sib.select().focus();
+  }
+
+  function onKeyDown(e) {
+    var key = e.which;
+
+    if (key === 9 || (key >= 48 && key <= 57)) {
+      return true;
+    }
+
+    e.preventDefault();
+    return false;
+  }
+  
+  function onFocus(e) {
+    $(e.target).select();
+  }
+
+  body.on('keyup', 'input', goToNextInput);
+  body.on('keydown', 'input', onKeyDown);
+  body.on('click', 'input', onFocus);
+
+})
+    </script>
+          
