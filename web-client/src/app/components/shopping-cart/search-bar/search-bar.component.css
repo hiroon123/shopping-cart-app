@@ -1,0 +1,15 @@
+.card {
+  padding-top: 20px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+.search-box {
+  float: left;
+  width: fit-content;
+  margin-left: -20px;
+}
+.search-icon {
+  position: relative;
+  font-size: 20px;
+  top: 3px;
+}
