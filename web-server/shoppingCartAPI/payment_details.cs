@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace shoppingCartAPI
 {
-    public class payment_details
+    public class Payment_details
     {
         public int id { get; set; }
 

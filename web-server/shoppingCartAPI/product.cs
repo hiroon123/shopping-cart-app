@@ -15,12 +15,12 @@ namespace shoppingCartAPI
         public string product_desc { get; set; } = string.Empty;
 
         //category_id foreign key
-        public int category_id { get; set; }
+        public int? category_id { get; set; }
         [ForeignKey("category_id")]
         public product_category? category { get; set; }
 
         //inventory_id foreign key
-        public int inventory_id { get; set; }
+        public int? inventory_id { get; set; }
         [ForeignKey("inventory_id")]
         public product_inventory? inventory { get; set; }
 
@@ -32,9 +32,9 @@ namespace shoppingCartAPI
 
         public string? img3_url { get; set; } = string.Empty;
 
-        public DateTime created { get; set; }
+        public DateTime? created { get; set; }
 
-        public DateTime modified { get; set; }
+        public DateTime? modified { get; set; }
 
         public DateTime? deleted { get; set; }
 

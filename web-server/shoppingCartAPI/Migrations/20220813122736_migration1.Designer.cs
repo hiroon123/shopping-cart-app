@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using shoppingCartAPI.Data;
 
@@ -11,9 +12,10 @@ using shoppingCartAPI.Data;
 namespace shoppingCartAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220813122736_migration1")]
+    partial class migration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,7 +176,7 @@ namespace shoppingCartAPI.Migrations
                     b.ToTable("Order_Items");
                 });
 
-            modelBuilder.Entity("shoppingCartAPI.Payment_details", b =>
+            modelBuilder.Entity("shoppingCartAPI.payment_details", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -228,10 +230,10 @@ namespace shoppingCartAPI.Migrations
                     b.Property<bool>("active")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("category_id")
+                    b.Property<int>("category_id")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("created")
+                    b.Property<DateTime>("created")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("deleted")
@@ -246,10 +248,10 @@ namespace shoppingCartAPI.Migrations
                     b.Property<string>("img3_url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("inventory_id")
+                    b.Property<int>("inventory_id")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("modified")
+                    b.Property<DateTime>("modified")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("price")
@@ -493,7 +495,7 @@ namespace shoppingCartAPI.Migrations
                     b.Navigation("product");
                 });
 
-            modelBuilder.Entity("shoppingCartAPI.Payment_details", b =>
+            modelBuilder.Entity("shoppingCartAPI.payment_details", b =>
                 {
                     b.HasOne("shoppingCartAPI.order_details", "order_details")
                         .WithMany()
@@ -516,11 +518,15 @@ namespace shoppingCartAPI.Migrations
                 {
                     b.HasOne("shoppingCartAPI.product_category", "category")
                         .WithMany()
-                        .HasForeignKey("category_id");
+                        .HasForeignKey("category_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("shoppingCartAPI.product_inventory", "inventory")
                         .WithMany()
-                        .HasForeignKey("inventory_id");
+                        .HasForeignKey("inventory_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("category");
 

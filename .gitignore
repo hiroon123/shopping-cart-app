@@ -616,3 +616,12 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,angular,aspnetcore,visualstudio,visualstudiocode,dotnetcore
+
+#NuGet
+packages
+packages/repositories.config
+/packages/build/
+packages/repositories.config
+
+.vscode
+web-server/shoppingCartAPI/bin/Debug

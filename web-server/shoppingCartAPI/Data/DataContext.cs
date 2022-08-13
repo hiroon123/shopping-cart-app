@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace shoppingCartAPI.Data
 {
-    public class DataContext:DbContext
+    public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
@@ -17,7 +17,7 @@ namespace shoppingCartAPI.Data
 
         public DbSet<user>? Users { get; set; }
 
-        public DbSet<payment_details>? payment_Details { get; set; }
+        public DbSet<Payment_details>? payment_Details { get; set; }
 
         public DbSet<order_items>? Order_Items { get; set; }
 

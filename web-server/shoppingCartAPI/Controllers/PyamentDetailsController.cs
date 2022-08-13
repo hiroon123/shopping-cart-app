@@ -23,23 +23,23 @@ namespace shoppingCartAPI.Controllers
 
         // GET: api/PyamentDetails
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<payment_details>>> Getpayment_Details()
+        public async Task<ActionResult<IEnumerable<Payment_details>>> Getpayment_Details()
         {
-          if (_context.payment_Details == null)
-          {
-              return NotFound();
-          }
+            if (_context.payment_Details == null)
+            {
+                return NotFound();
+            }
             return await _context.payment_Details.ToListAsync();
         }
 
         // GET: api/PyamentDetails/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<payment_details>> Getpayment_details(int id)
+        public async Task<ActionResult<Payment_details>> Getpayment_details(int id)
         {
-          if (_context.payment_Details == null)
-          {
-              return NotFound();
-          }
+            if (_context.payment_Details == null)
+            {
+                return NotFound();
+            }
             var payment_details = await _context.payment_Details.FindAsync(id);
 
             if (payment_details == null)
@@ -53,7 +53,7 @@ namespace shoppingCartAPI.Controllers
         // PUT: api/PyamentDetails/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putpayment_details(int id, payment_details payment_details)
+        public async Task<IActionResult> Putpayment_details(int id, Payment_details payment_details)
         {
             if (id != payment_details.id)
             {
@@ -84,12 +84,12 @@ namespace shoppingCartAPI.Controllers
         // POST: api/PyamentDetails
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<payment_details>> Postpayment_details(payment_details payment_details)
+        public async Task<ActionResult<Payment_details>> Postpayment_details(Payment_details payment_details)
         {
-          if (_context.payment_Details == null)
-          {
-              return Problem("Entity set 'DataContext.payment_Details'  is null.");
-          }
+            if (_context.payment_Details == null)
+            {
+                return Problem("Entity set 'DataContext.payment_Details'  is null.");
+            }
             _context.payment_Details.Add(payment_details);
             await _context.SaveChangesAsync();
 
