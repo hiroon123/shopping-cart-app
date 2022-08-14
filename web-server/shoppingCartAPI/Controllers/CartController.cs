@@ -84,16 +84,19 @@ namespace shoppingCartAPI.Controllers
         // POST: api/Cart
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<cart>> Postcart(cart cart)
+        public async Task<ActionResult<cart>> Postcart(cart request)
         {
-          if (_context.Carts == null)
-          {
-              return Problem("Entity set 'DataContext.Carts'  is null.");
-          }
-            _context.Carts.Add(cart);
+
+            if (_context.Carts.Any(c => c.product_id == request.product_id))
+            {
+                request.qty++;
+            }
+
+            _context.Carts.Add(request);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getcart", new { id = cart.id }, cart);
+            return Ok();
         }
 
         // DELETE: api/Cart/5

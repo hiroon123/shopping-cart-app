@@ -33,10 +33,8 @@ export class CartItemComponent implements OnInit {
   }
 
   handleRemoveFromCart() {
-    this.cartService
-      .removeProductFromCart(this.cartItem.cart_item_id)
-      .subscribe(() => {
-        this.msg.sendMsg(this.cartItem);
-      });
+    this.cartService.removeProductFromCart(this.cartItem.id).subscribe(() => {
+      this.msg.sendMsg(this.cartItem);
+    });
   }
 }

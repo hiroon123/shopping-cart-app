@@ -21,7 +21,7 @@ export class CartService {
           let productExist = false;
 
           for (let index in cartItems) {
-            if (cartItems[index].id === item.product.id) {
+            if (cartItems[index].id === item.id) {
               cartItems[index].qty++;
               productExist = true;
               break;
@@ -38,9 +38,9 @@ export class CartService {
     );
   }
 
-  addProductToCart(cartItem: CartItem): Observable<any> {
+  addProductToCart(cartItem: CartItem) {
     console.log(cartItem);
-    return this.http.post(cartURL, { cartItem });
+    return this.http.post(cartURL, cartItem);
   }
 
   removeProductFromCart(cart_item_id: number) {
