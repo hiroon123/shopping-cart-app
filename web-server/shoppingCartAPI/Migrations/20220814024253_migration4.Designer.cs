@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using shoppingCartAPI.Data;
 
@@ -11,9 +12,10 @@ using shoppingCartAPI.Data;
 namespace shoppingCartAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220814024253_migration4")]
+    partial class migration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +106,7 @@ namespace shoppingCartAPI.Migrations
                     b.Property<int>("qty")
                         .HasColumnType("int");
 
-                    b.Property<int?>("user_id")
+                    b.Property<int>("user_id")
                         .HasColumnType("int");
 
                     b.HasKey("id");
@@ -454,7 +456,9 @@ namespace shoppingCartAPI.Migrations
 
                     b.HasOne("shoppingCartAPI.user", "user")
                         .WithMany()
-                        .HasForeignKey("user_id");
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("product");
 

@@ -1,49 +1,49 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CartItem } from '../models/cart-item';
-import { Observable, observable } from 'rxjs';
-import { map } from 'rxjs';
-import { cartItemsUrl } from '../config/api';
-import { Product } from '../models/product';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable, observable } from "rxjs";
+import { map } from "rxjs";
+import { cartURL } from "../config/api";
+import { Product } from "../models/product";
+import { CartItem } from "../models/cart-item";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CartService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
+  getCartItems(): Observable<CartItem[]> {
+    return this.http.get<CartItem[]>(cartURL).pipe(
+      map((result: any[]) => {
+        let cartItems: CartItem[] = [];
 
-  getCartItems(): Observable<CartItem[]>{
-    return this.http.get<CartItem[]>(cartItemsUrl).pipe(
-      map((result: any []) => {
-        let cartItems : CartItem[] = []
+        for (let item of result) {
+          let productExist = false;
 
-        for(let item of result) {
-          let productExist =false
-
-          for(let index in cartItems){
-            if(cartItems[index].prod_id===item.product.prod_id){
-              cartItems[index].prod_qty++
-              productExist =true
-              break
+          for (let index in cartItems) {
+            if (cartItems[index].id === item.product.id) {
+              cartItems[index].qty++;
+              productExist = true;
+              break;
             }
           }
 
-          if(!productExist){
-            cartItems.push(new CartItem(item.id,item.product,1))
+          if (!productExist) {
+            cartItems.push(new CartItem(item.id, item.product_id, item.qty));
           }
         }
 
-        return cartItems
+        return cartItems;
       })
     );
   }
 
-  addProductToCart(product: Product):Observable<any>{
-    return this.http.post(cartItemsUrl,{ product })
+  addProductToCart(cartItem: CartItem): Observable<any> {
+    console.log(cartItem);
+    return this.http.post(cartURL, { cartItem });
   }
 
-  removeProductFromCart(cart_item_id:number){
-    return this.http.delete(cartItemsUrl+'/'+cart_item_id)
+  removeProductFromCart(cart_item_id: number) {
+    return this.http.delete(cartURL + "/" + cart_item_id);
   }
 }

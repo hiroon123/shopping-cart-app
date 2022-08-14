@@ -13,13 +13,13 @@ namespace shoppingCartAPI
         public product? product { get; set; }
 
         //user_id foreign key
-        public int user_id { get; set; }
+        public int? user_id { get; set; }
         [ForeignKey("user_id")]
         public user? user { get; set; }
 
         public int qty { get; set; }
 
-        public DateTime created { get; set; }
+        public DateTime? created { get; set; }
     }
 }
 

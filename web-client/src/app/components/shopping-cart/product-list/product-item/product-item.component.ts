@@ -3,6 +3,7 @@ import { Product } from "src/app/models/product";
 import { MessengerService } from "src/app/services/messenger.service";
 import { CartService } from "src/app/services/cart.service";
 import { WishlistService } from "src/app/services/wishlist.service";
+import { CartItem } from "src/app/models/cart-item";
 
 @Component({
   selector: "app-product-item",
@@ -22,9 +23,11 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {}
 
   handleAddToCart() {
-    this.cartService.addProductToCart(this.productItem).subscribe(() => {
-      this.msg.sendMsg(this.productItem);
-    });
+    this.cartService
+      .addProductToCart(new CartItem(0, this.productItem.id, 1))
+      .subscribe(() => {
+        this.msg.sendMsg(this.productItem);
+      });
   }
 
   handleAddToWishlist() {

@@ -14,3 +14,4 @@ export const verifyUserUrl = WebApiUrl + "/User/SendVerificationEmail";
 export const loginUserUrl = WebApiUrl + "/User/Login";
 
 export const productURL = WebApiUrl + "/Product";
+export const cartURL = WebApiUrl + "/Cart";
