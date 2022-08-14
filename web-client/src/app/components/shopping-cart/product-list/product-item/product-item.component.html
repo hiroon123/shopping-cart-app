@@ -1,19 +1,41 @@
 <div class="card shadow-sm">
-    <img class="bd-placeholder-img card-img-top" width="100%" height="200" [src]="productItem.prod_img_url">
-    <div class="card-body">
-        <h5 class="text-truncate">{{productItem.prod_name}}</h5>
-        <strong><h6 class="text-muted">{{productItem.prod_price| currency:'USD'}}</h6></strong>
-        <p class="card-text">{{productItem.prod_desc | slice: 0:60}}...</p>
-        <div class="prd-btn-grp">
-            <button 
-            type="button"
-            class="btn btn-sm btn-outline-success prod-btn"
-            (click)="handleAddToCart()">
-            <i class="fa-solid fa-cart-plus"></i> Add to cart</button>
-            <button type="button" class="btn btn-sm btn-outline-danger float-right prod-btn">
-                <i *ngIf="!addedToWishlist" class="far fa-heart" (click)="handleAddToWishlist()" ></i>
-                <i *ngIf="addedToWishlist" class="fa-solid fa-heart" (click)="handleRemoveFromWishlist()" ></i>
-            </button>
-        </div>
+  <img
+    class="bd-placeholder-img card-img-top"
+    width="100%"
+    height="200"
+    [src]="productItem.img1_url"
+  />
+  <div class="card-body">
+    <h5 class="text-truncate">{{ productItem.produdct_name }}</h5>
+    <strong
+      ><h6 class="text-muted">
+        {{ productItem.price | currency: "USD" }}
+      </h6></strong
+    >
+    <p class="card-text">{{ productItem.product_desc | slice: 0:60 }}...</p>
+    <div class="prd-btn-grp">
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-success prod-btn"
+        (click)="handleAddToCart()"
+      >
+        <i class="fa-solid fa-cart-plus"></i> Add to cart
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-danger float-right prod-btn"
+      >
+        <i
+          *ngIf="!addedToWishlist"
+          class="far fa-heart"
+          (click)="handleAddToWishlist()"
+        ></i>
+        <i
+          *ngIf="addedToWishlist"
+          class="fa-solid fa-heart"
+          (click)="handleRemoveFromWishlist()"
+        ></i>
+      </button>
     </div>
   </div>
+</div>

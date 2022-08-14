@@ -1,18 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Product } from '../models/product';
-import { productsUrl } from 'src/app/config/api';
-
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Product } from "../models/product";
+import { productsUrl, productURL } from "src/app/config/api";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ProductService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(productsUrl);
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(productURL);
   }
 }
