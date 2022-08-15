@@ -21,7 +21,7 @@ export class CartService {
           let productExist = false;
 
           for (let index in cartItems) {
-            if (cartItems[index].id === item.id) {
+            if (cartItems[index].product_id === item.product_id) {
               cartItems[index].qty++;
               productExist = true;
               break;
@@ -29,7 +29,9 @@ export class CartService {
           }
 
           if (!productExist) {
-            cartItems.push(new CartItem(item.id, item.product_id, item.qty));
+            cartItems.push(
+              new CartItem(item.id, item.product_id, item.user_id, 1)
+            );
           }
         }
 

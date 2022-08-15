@@ -9,9 +9,7 @@ namespace shoppingCartAPI
 
         public int product_id { get; set; }
 
-        public int? user_id { get; set; }
-
-        public int qty { get; set; }
+        public int user_id { get; set; }
 
         public DateTime? created { get; set; }
     }

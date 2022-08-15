@@ -87,12 +87,14 @@ namespace shoppingCartAPI.Controllers
         public async Task<ActionResult<cart>> Postcart(cart request)
         {
 
-            if (_context.Carts.Any(c => c.product_id == request.product_id))
+            var cart_item = new cart
             {
-                request.qty++;
-            }
+                product_id = request.product_id,
+                user_id = request.user_id,
+                created = DateTime.UtcNow,
+            };
 
-            _context.Carts.Add(request);
+            _context.Carts.Add(cart_item);
 
             await _context.SaveChangesAsync();
 
