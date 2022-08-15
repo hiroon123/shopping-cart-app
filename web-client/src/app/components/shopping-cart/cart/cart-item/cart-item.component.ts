@@ -19,18 +19,7 @@ export class CartItemComponent implements OnInit {
     private msg: MessengerService
   ) {}
 
-  ngOnInit(): void {
-    this.loadProductData();
-  }
-
-  loadProductData() {
-    this.productService
-      .getSingleProduct(this.cartItem.product_id)
-      .subscribe((product) => {
-        this.product = product;
-        console.log(this.product);
-      });
-  }
+  ngOnInit(): void {}
 
   handleRemoveFromCart() {
     this.cartService.removeProductFromCart(this.cartItem.id).subscribe(() => {

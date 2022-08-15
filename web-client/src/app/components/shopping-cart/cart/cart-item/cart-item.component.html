@@ -4,11 +4,11 @@
       class="bd-placeholder-img card-img-top"
       width="40px"
       height="40px"
-      [src]="product.img1_url"
+      [src]="cartItem.product.img1_url"
     />
   </div>
   <div class="col-md-9">
-    <p class="cart-item-text">{{ product.product_name }}</p>
+    <p class="cart-item-text">{{ cartItem.product.product_name }}</p>
   </div>
 </div>
 <br />
@@ -23,7 +23,7 @@
   <div class="col-md-5 justify-content-between align-items-center">
     <strong
       ><p class="cart-item-text mt-1">
-        {{ cartItem.qty * product.price | currency: "USD" }}
+        {{ cartItem.qty * cartItem.product.price | currency: "USD" }}
       </p></strong
     >
   </div>

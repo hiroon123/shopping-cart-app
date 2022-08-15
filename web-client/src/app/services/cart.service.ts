@@ -2,26 +2,31 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, observable } from "rxjs";
 import { map } from "rxjs";
-import { cartURL } from "../config/api";
+import { cartURL, productURL } from "../config/api";
 import { Product } from "../models/product";
 import { CartItem } from "../models/cart-item";
+import { ProductService } from "./product.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class CartService {
-  constructor(private http: HttpClient) {}
+  product!: Product;
+
+  constructor(
+    private http: HttpClient,
+    private productService: ProductService
+  ) {}
 
   getCartItems(): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(cartURL).pipe(
       map((result: any[]) => {
         let cartItems: CartItem[] = [];
-
         for (let item of result) {
           let productExist = false;
 
           for (let index in cartItems) {
-            if (cartItems[index].product_id === item.product_id) {
+            if (cartItems[index].product_id == item.product_id) {
               cartItems[index].qty++;
               productExist = true;
               break;
@@ -30,14 +35,30 @@ export class CartService {
 
           if (!productExist) {
             cartItems.push(
-              new CartItem(item.id, item.product_id, item.user_id, 1)
+              new CartItem(
+                item.id,
+                item.product_id,
+                item.user_id,
+                new Product(),
+                1
+              )
             );
           }
         }
-
+        this.addProductDataToCartItems(cartItems);
         return cartItems;
       })
     );
+  }
+
+  addProductDataToCartItems(cartItems: CartItem[]) {
+    for (let item of cartItems) {
+      this.productService
+        .getSingleProduct(item.product_id)
+        .subscribe((product) => {
+          item.product = product;
+        });
+    }
   }
 
   addProductToCart(cartItem: CartItem) {
