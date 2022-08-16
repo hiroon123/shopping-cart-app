@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -146,7 +147,7 @@ namespace shoppingCartAPI.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.email == email_address);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest("User Not Found");
             }
@@ -156,23 +157,26 @@ namespace shoppingCartAPI.Controllers
             user.verification_token = generated_verification_token;
             user.verfied_at = null;
 
-             _context.SaveChanges();
+            _context.SaveChanges();
 
-            /*var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("hiroon.victory@gmail.com"));
-            email.To.Add(MailboxAddress.Parse(email_address));
-            email.Subject = "Please verify your account";
+            string fromMail = "createsyhotline@gmail.com";
+            string fromPwd = "prwxuhdttdeumxyb";
 
-            string body = "<h4>Your Verification Code: </h4><h6>" + generated_verification_token + "</h6>";
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(fromMail);
+            message.Subject = "Shopsy - Verification Code";
+            message.To.Add(new MailAddress(email_address));
+            message.Body = "<html><body><h4>Your Verification Code: </h4><h4>" + generated_verification_token + "</h4></body></html>";
+            message.IsBodyHtml = true;
 
-            email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromMail, fromPwd),
+                EnableSsl = true
+            };
 
-            using var smtp = new SmtpClient();
-            smtp.Connect("ssmtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
-            smtp.Authenticate("hiroon.victory@gmail.com", "iwTft*5HWo!i#G");
-            smtp.Send(email);
-            smtp.Disconnect(true);*/
-
+            smtpClient.Send(message);
             return Ok();
         }
 
@@ -189,7 +193,7 @@ namespace shoppingCartAPI.Controllers
             user.verfied_at = DateTime.UtcNow;
             await _context.SaveChangesAsync();
 
-            return Ok("Token Verfied");
+            return Ok();
         }
 
         // POST: api/User/Login
@@ -271,20 +275,21 @@ namespace shoppingCartAPI.Controllers
             await _context.SaveChangesAsync();
 
 
-            var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("desiree.ankunding43@ethereal.email"));
-            email.To.Add(MailboxAddress.Parse(email_address));
-            email.Subject = "Password verification code";
+            /* var email = new MimeMessage();
+             email.From.Add(MailboxAddress.Parse("desiree.ankunding43@ethereal.email"));
+             email.To.Add(MailboxAddress.Parse(email_address));
+             email.Subject = "Password verification code";
 
-            string body = "<h4>Your Password Reset Code: </h4><h6>" + generated_reset_token + "</h6>";
+             string body = "<h4>Your Password Reset Code: </h4><h6>" + generated_reset_token + "</h6>";
 
-            email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
+             email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
 
-            using var smtp = new SmtpClient();
-            smtp.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
-            smtp.Authenticate("desiree.ankunding43@ethereal.email", "vy2FzdxKuRepQgAz8z");
-            smtp.Send(email);
-            smtp.Disconnect(true);
+             using var smtp = new SmtpClient();
+             smtp.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
+             smtp.Authenticate("desiree.ankunding43@ethereal.email", "vy2FzdxKuRepQgAz8z");
+             smtp.Send(email);
+             smtp.Disconnect(true);
+            */
 
             return Ok("Token Sent");
         }

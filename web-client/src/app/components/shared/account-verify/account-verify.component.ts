@@ -13,6 +13,7 @@ export class AccountVerifyComponent implements OnInit {
   verificationCodeForm!: FormGroup;
   errorMessage = "";
   emailaddress: string | undefined = "";
+  input_code: string = "";
 
   constructor(
     private builder: FormBuilder,
@@ -51,7 +52,7 @@ export class AccountVerifyComponent implements OnInit {
   sendVerificationCode() {
     this.userService.sendVerificationEmail(this.emailaddress).subscribe(
       () => {
-        console.log("veri email sent");
+        console.log("Verification Email Sent");
       },
       (err) => {
         this.errorMessage = err.message;
@@ -59,5 +60,24 @@ export class AccountVerifyComponent implements OnInit {
     );
   }
 
-  verify() {}
+  verify() {
+    this.input_code =
+      this.verificationCodeForm.value.s1 +
+      this.verificationCodeForm.value.s2 +
+      this.verificationCodeForm.value.s3 +
+      this.verificationCodeForm.value.s4 +
+      this.verificationCodeForm.value.s5 +
+      this.verificationCodeForm.value.s6;
+    this.input_code = this.input_code.toUpperCase();
+    console.log(this.input_code);
+    this.userService.verifyUser(this.emailaddress, this.input_code).subscribe(
+      () => {
+        console.log("User Verified");
+        this.router.navigate(["/register-success"]);
+      },
+      (err) => {
+        this.errorMessage = err.message;
+      }
+    );
+  }
 }

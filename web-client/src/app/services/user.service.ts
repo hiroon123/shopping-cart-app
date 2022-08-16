@@ -1,6 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { loginUserUrl, registerUserUrl, sendVeriEmailUrl } from "../config/api";
+import {
+  loginUserUrl,
+  registerUserUrl,
+  sendVeriEmailUrl,
+  VeriUserUrl,
+} from "../config/api";
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +18,15 @@ export class UserService {
   }
 
   sendVerificationEmail(data: any) {
-    return this.http.post(sendVeriEmailUrl + "?email_address=" + data, 0);
+    console.log("Sending Email...");
+    return this.http.post(sendVeriEmailUrl + "?email_address=" + data, null);
+  }
+
+  verifyUser(email: any, token: any) {
+    return this.http.post(
+      VeriUserUrl + "?email=" + email + "&token=" + token,
+      null
+    );
   }
 
   loginUser(data: any) {
