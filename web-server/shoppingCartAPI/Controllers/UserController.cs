@@ -158,8 +158,8 @@ namespace shoppingCartAPI.Controllers
 
              _context.SaveChanges();
 
-            var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("desiree.ankunding43@ethereal.email"));
+            /*var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("hiroon.victory@gmail.com"));
             email.To.Add(MailboxAddress.Parse(email_address));
             email.Subject = "Please verify your account";
 
@@ -168,10 +168,10 @@ namespace shoppingCartAPI.Controllers
             email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
 
             using var smtp = new SmtpClient();
-            smtp.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
-            smtp.Authenticate("desiree.ankunding43@ethereal.email", "vy2FzdxKuRepQgAz8z");
+            smtp.Connect("ssmtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
+            smtp.Authenticate("hiroon.victory@gmail.com", "iwTft*5HWo!i#G");
             smtp.Send(email);
-            smtp.Disconnect(true);
+            smtp.Disconnect(true);*/
 
             return Ok();
         }

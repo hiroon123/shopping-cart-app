@@ -10,7 +10,7 @@ export const wishListUrl = apiUrl + "/wishlist";
 export const WebApiUrl = "https://localhost:7081/api";
 
 export const registerUserUrl = WebApiUrl + "/User/Register";
-export const verifyUserUrl = WebApiUrl + "/User/SendVerificationEmail";
+export const sendVeriEmailUrl = WebApiUrl + "/User/SendVerificationEmail";
 export const loginUserUrl = WebApiUrl + "/User/Login";
 
 export const productURL = WebApiUrl + "/Product";
