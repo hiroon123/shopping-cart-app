@@ -4,19 +4,25 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using MimeKit;
 using shoppingCartAPI;
 using shoppingCartAPI.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace shoppingCartAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -199,7 +205,7 @@ namespace shoppingCartAPI.Controllers
         // POST: api/User/Login
         //api/post
         [HttpPost("Login")]
-        public async Task<ActionResult> Login(user_login_request request)
+        public async Task<IActionResult> SignInAsync(user_login_request request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.email == request.email);
 
@@ -220,8 +226,27 @@ namespace shoppingCartAPI.Controllers
 
             string token = createJWT(user);
 
+            //Create cookie containing auth token
+            Response.Cookies.Append("shopsyActiveUser", token, new CookieOptions()
+             {
+                 Expires = DateTimeOffset.Now.AddHours(2),
+                 Path = "/",
+                 HttpOnly = true,
+                 Secure = true,
+             });
+
             return Ok();
         }
+
+        //Get logged in user data
+        // GET: api/User/Login
+        /*[HttpGet("login")]
+        [Authorize]
+        private async Task<Object> GetUserProfile()
+        {
+            
+        }*/
+
 
         //Check Password Hash and Salt
         private bool verifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -238,7 +263,7 @@ namespace shoppingCartAPI.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.email)
+                new Claim("email", user.email)
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 _configuration.GetSection("AppSettings:JWTkey").Value));
@@ -291,7 +316,7 @@ namespace shoppingCartAPI.Controllers
              smtp.Disconnect(true);
             */
 
-            return Ok("Token Sent");
+            return Ok();
         }
 
         //Reset Password

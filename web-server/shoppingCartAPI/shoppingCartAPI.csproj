@@ -20,6 +20,8 @@
     </PackageReference>
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="NuGet.PackageManagement" Version="6.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.2.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,8 @@
     <None Remove="Migrations\" />
     <None Remove="MailKit" />
     <None Remove="NuGet.PackageManagement" />
+    <None Remove="Microsoft.AspNetCore.CookiePolicy" />
+    <None Remove="Microsoft.AspNetCore.Authentication.Cookies" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
