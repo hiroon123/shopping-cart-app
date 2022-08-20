@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { User } from "src/app/models/user";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
@@ -10,6 +11,7 @@ import { UserService } from "src/app/services/user.service";
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  user!: User;
 
   constructor(
     private builder: FormBuilder,
@@ -34,8 +36,16 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.value.emailaddress,
       password: this.loginForm.value.password,
     };
-    this.userService.loginUser(user).subscribe((result) => {
-      console.log(result);
-    });
+    this.userService.loginUser(user).subscribe(
+      () => {
+        this.userService.authenticateUser().subscribe((user) => {
+          this.user = user;
+          console.log(user);
+        });
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
   }
 }

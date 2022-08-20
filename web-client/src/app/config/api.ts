@@ -13,6 +13,7 @@ export const registerUserUrl = WebApiUrl + "/User/Register";
 export const sendVeriEmailUrl = WebApiUrl + "/User/SendVerificationEmail";
 export const VeriUserUrl = WebApiUrl + "/User/VerifyToken";
 export const loginUserUrl = WebApiUrl + "/User/Login";
+export const authenticateUserUrl = WebApiUrl + "/User/Authenticate";
 
 export const productURL = WebApiUrl + "/Product";
 export const cartURL = WebApiUrl + "/Cart";

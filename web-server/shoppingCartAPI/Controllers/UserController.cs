@@ -19,6 +19,7 @@ using shoppingCartAPI;
 using shoppingCartAPI.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using NuGet.Common;
 
 namespace shoppingCartAPI.Controllers
 {
@@ -205,7 +206,7 @@ namespace shoppingCartAPI.Controllers
         // POST: api/User/Login
         //api/post
         [HttpPost("Login")]
-        public async Task<IActionResult> SignInAsync(user_login_request request)
+        public async Task<ActionResult> Login(user_login_request request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.email == request.email);
 
@@ -227,12 +228,12 @@ namespace shoppingCartAPI.Controllers
             string token = createJWT(user);
 
             //Create cookie containing auth token
-            Response.Cookies.Append("shopsyActiveUser", token, new CookieOptions()
+            Response.Cookies.Append("shopsyLoggedInUser",token, new CookieOptions()
              {
                  Expires = DateTimeOffset.Now.AddHours(2),
                  Path = "/",
-                 HttpOnly = true,
-                 Secure = true,
+                 HttpOnly = false,
+                 Secure = false,
              });
 
             return Ok();
@@ -240,12 +241,34 @@ namespace shoppingCartAPI.Controllers
 
         //Get logged in user data
         // GET: api/User/Login
-        /*[HttpGet("login")]
-        [Authorize]
-        private async Task<Object> GetUserProfile()
+        [HttpGet("Authenticate")]
+        public async Task<ActionResult<user>> GetUserProfile()
         {
-            
-        }*/
+            user user_;
+            var token = Request.Cookies["shopsyLoggedInUser"];
+
+            if (token == null && token == "")
+            {
+
+                return BadRequest();
+            }
+            else
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
+                var stringClaimValue = securityToken.Claims.First(claim => claim.Type == "UserID").Value;
+
+                user_ = await _context.Users.FindAsync(Int32.Parse(stringClaimValue));
+
+                if (user_ == null)
+                {
+                    return NotFound();
+                }
+
+            }
+
+            return user_;
+        }
 
 
         //Check Password Hash and Salt
@@ -263,7 +286,7 @@ namespace shoppingCartAPI.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim("email", user.email)
+                new Claim("UserID", user.id.ToString())
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 _configuration.GetSection("AppSettings:JWTkey").Value));

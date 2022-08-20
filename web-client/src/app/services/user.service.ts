@@ -1,11 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import {
+  authenticateUserUrl,
   loginUserUrl,
   registerUserUrl,
   sendVeriEmailUrl,
   VeriUserUrl,
 } from "../config/api";
+import { User } from "../models/user";
 
 @Injectable({
   providedIn: "root",
@@ -31,5 +34,9 @@ export class UserService {
 
   loginUser(data: any) {
     return this.http.post(loginUserUrl, data);
+  }
+
+  authenticateUser(): Observable<User> {
+    return this.http.get<User>(authenticateUserUrl, { withCredentials: true });
   }
 }
