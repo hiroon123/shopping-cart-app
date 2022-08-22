@@ -20,6 +20,7 @@ using shoppingCartAPI.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using NuGet.Common;
+using Microsoft.AspNetCore.Identity;
 
 namespace shoppingCartAPI.Controllers
 {
@@ -225,18 +226,30 @@ namespace shoppingCartAPI.Controllers
                 return BadRequest("Not Verified");
             }
 
-            string token = createJWT(user);
+            var out_user = new user
+            {
+                id= user.id,
+                email = user.email,
+                first_name = user.first_name,
+                last_name = user.last_name,
+                dob = user.dob,
+                gender = user.gender,
+                created = user.created
+            };
+
+            //string token = createJWT(user);
 
             //Create cookie containing auth token
-            Response.Cookies.Append("shopsyLoggedInUser",token, new CookieOptions()
+            /*Response.Cookies.Append("shopsyLoggedInUser",token, new CookieOptions()
              {
                  Expires = DateTimeOffset.Now.AddHours(2),
                  Path = "/",
                  HttpOnly = false,
                  Secure = false,
-             });
+             });*/
 
-            return Ok();
+
+            return Ok(out_user);
         }
 
         //Get logged in user data
